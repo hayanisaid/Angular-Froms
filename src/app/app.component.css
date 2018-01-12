@@ -1,0 +1,17 @@
+body{
+	margin:0;
+	padding: 0;
+}
+
+input.ng-valid{
+	border-left: 2px solid green;
+}
+input.ng-invalid{
+	border-left: 2px solid red;
+}
+input.ng-prestine{
+	border-left: 2px solid orange;
+}
+input.ng-dirty{
+	border-left: 2px solid purple;
+}
