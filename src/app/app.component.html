@@ -3,10 +3,23 @@
 	<form #userForm='ngForm'  (ngSubmit)='onSubmit(userForm.value)'>
 		<div class="form-group">
 			<label>Name</label>
-			<input type="text" required #nameRef='ngModel' class="form-control" name="name" ngModel>
+			<input type="text" required maxlength="10" minlength="5" #nameRef='ngModel' class="form-control" name="name" ngModel>
 			<!-- <span>{{nameRef.className}}</span> -->
-			<div [hidden]="nameRef.valid || nameRef.pristine" class="alert alert-danger">
+			<!-- <div [hidden]="nameRef.valid || nameRef.pristine" class="alert alert-danger">
 				please Enter the name
+			</div> -->
+
+			<!-- advanced validation -->
+			<div *ngIf="nameRef.errors &&(nameRef.dirty || nameRef.touched)" class="alert alert-danger">
+				<div [hidden]=!nameRef.errors.required>
+					please Enter the name
+				</div>
+				<div [hidden]=!nameRef.errors.minlength>
+					please Enter at leaset 5 characters!
+				</div>
+				<div [hidden]=!nameRef.errors.maxlength>
+					the maximum is 10 Char !
+				</div>
 			</div>
 		</div>
 		<div class="form-group">
@@ -24,7 +37,13 @@
 		</div>
 		<div class="form-group">
 			<label>Code Zip</label>
-			<input type="text" class="form-control" name="codepostal" ngModel>
+			<input type="text" #RefPin='ngModel' pattern="^[1-9][1-9]{4}$" class="form-control" name="codepostal" ngModel>
+			<div *ngIf="RefPin.errors &&(RefPin.dirty|| RefPin.touched)" class="alert alert-danger">
+			  <div [hidden]='!RefPin.errors.pattern'>
+			  	please enter 5 Digit
+			  </div>	
+
+			</div>
 		</div>
 		</div>
 		
